@@ -1,0 +1,1 @@
+setenv('MW_MINGW64_LOC','C:\mingw-w64\mingw64')

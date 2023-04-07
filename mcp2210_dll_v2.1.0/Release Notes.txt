@@ -1,0 +1,64 @@
+-------------------------------------------------------------------
+        Release Notes for the MCP2210 DLL package
+-------------------------------------------------------------------
+
+                Microchip Technology, Inc.
+
+
+MCP2210 DLL package includes three types of libraries, implementing the API that user applications 
+may include in order to configure and use the MCP2210 device features:
+ - unmanaged DLL (.dll)
+ - managed DLL (.dll)
+ - standard C library (.lib)
+
+The managed DLLs are offered for the following .NET versions: 
+ - .NET4
+ - .NET2
+  
+The libraries are included both as 32bit and 64bit builds, 
+except managed DLL for .NET2 which is supported only in 32bit version.
+
+-------------------------------------------------------------------
+System Requirements
+-------------------------------------------------------------------
+Operating System: Windows XP SP3 or later.
+
+.NET4 Version: .NET4 Framework and Microsoft Visual C++ 2010 Redistributable Package (x86)*
+.NET2 Version: .NET2 Framework and Microsoft Visual C++ 2008 Redistributable Package (x86)**
+
+  *= Or include msvcp120.dll and msvcr120.dll in same directory as DLL
+ **= Or include msvcp90.dll, msvcm90.dll and msvcr90.dll in same directory as DLL
+
+-------------------------------------------------------------------
+Versioning History
+-------------------------------------------------------------------
+Version 2.1.0 (Released 05/16/2016)
+- Bug fix: Application exception caused by HID device enumeration inside managed dll, unmanaged dll
+    or lib, if HID device with hardware ID longer than 68 characters is found. 
+    The API calls affected by this issue are: GetConnectedDevCount(), OpenByIndex(), OpenBySN(). 
+- Included "__stdcall" in the exported functions prototype - mcp2210_dll_um.h - in order to avoid 
+    potential calling convention mismatch with the caller application. No function change.
+    
+Version 2.0.0 - documentation update 03/07/2016:
+- "MCP2210 DLL User Guide" update: 
+   - Added the note about the library API C/C++ calling convention, in the 
+   "API integration considerations" paragraph.
+ 
+Version 2.0.0 (Released 11/20/2015):
+ - The first issue of the refactored MCP2210 DLL package (DLL version 2). 
+   The main design changes implemented by the new DLL revision are (compared to 1.x.y revision):
+   - The library is stateless (there is no internal state machine tracking the device 
+     connection status)
+   - The MCP2210 devices must be "opened" first and then "identified" by their unique "file" handle 
+     which is a parameter for all the API calls. 
+   - The new, simplified, API covers all the device features with fewer function calls. 
+     Therefore, care must be taken when porting the user applications from the 1.x.y DLL to 
+     2.0.0 DLL, because except very few cases there is no direct mapping between the old API and 
+     the new one.
+
+-------------------------------------------------------------------
+Contact Information
+-------------------------------------------------------------------
+Main Website:       http://www.microchip.com
+Technical Support:  http://support.microchip.com
+
